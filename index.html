@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div class="container">
+        <div class="container-1">
+            <div class="ui-set">
+                <span class="sub-heading">
+                    Conference mode
+                </span>
+                <span class="conf-mode-selection-container">
+                    <span class="conf-mode active" id="videoConf">
+                        Video
+                    </span>
+                    <span class="conf-mode" id="voiceConf">
+                        Voice
+                    </span>
+                </span>
+            </div>
+            <div class="slider-container">
+                <div class="ui-set">
+                    <span class="sub-heading">
+                        Participants per call
+                    </span>
+                    <span class="input-container">
+                        <input type="number" value="10" onkeypress='return restrictAlphabets(event)' id="participantsInput" class="calculator-input">
+                        <div class="tooltip invisible">
+                            <span class="tooltiparrow"></span>
+                            <span class="tooltiptext">Some text friendo</span> 
+                        </div>
+                    </span>
+                </div>
+                <div class="calculator-slider">
+                    <span class="slider-track">
+                    </span>
+                    <input type="range" min="2" max="500" value="10" step="1" id="participantsSlider" class="calculator-input calculator-range">
+                </div>
+                  
+            </div>
+            <div class="slider-container">
+                <div class="ui-set">
+                    <span class="sub-heading">
+                        Average call length
+                        <div class="avg-call-length-small" >
+                            (hh:mm)
+                        </div>
+                    </span>
+                    <span class="input-container">
+                        <input type="time" min="00:00" max="09:00" value = "00:30" id="callLengthInput" class="calculator-input">
+                        <div class="tooltip invisible">
+                            <span class="tooltiparrow"></span>
+                            <span class="tooltiptext"></span>
+                        </div>
+                    </span>
+                </div>
+                <div class="calculator-slider">
+                    <span class="slider-track">
+                    </span>
+                    <input type="range" min="1" max="300" value="30" step="1" id="callLengthSlider" class="calculator-input calculator-range">
+                </div>
+            </div>
+            <div class="slider-container">
+                <div class="ui-set">
+                    <span class="sub-heading">
+                        Monthly calls
+                    </span>
+                    <span class="input-container">
+                        <input type="number" value="100" id="monthlyCallsInput" onkeypress='return restrictAlphabets(event)' class="calculator-input">
+                        <div class="tooltip invisible">
+                            <span class="tooltiparrow"></span>
+                            <span class="tooltiptext"></span>
+                        </div>
+                    </span>
+                </div>
+                <div class="calculator-slider">
+                    <span class="slider-track">
+                    </span>
+                    <input type="range" min="1" max="1000" value="100" step="1" id="monthlyCallsSlider" class="calculator-input calculator-range">
+                </div>
+            </div>
+            <div class="add-ons">
+                <div class="add-on-text">
+                    Add on Services
+                </div>
+                <div class="ui-set add-on-m">
+                    <span class="add-on-set">
+                        <img src="https://uploads-ssl.webflow.com/63ca2acc6352c221abe583d0/63ce9f424d514d38347bb197_recording.svg" alt="recording">     
+                        <span class="mini-heading">
+                            Recording
+                        </span>
+                    </span>
+                    <span>
+                        <label class="switch">
+                            <input type="checkbox" checked id="recordingToggle" class="calculator-input">
+                            <span class="toggle round"></span>
+                        </label>
+                    </span>
+                </div>
+                <div class="ui-set add-on-m">    
+                    <span class="add-on-set">
+                        <img src="https://uploads-ssl.webflow.com/63ca2acc6352c221abe583d0/63ce9f435fad4a254d95ef25_rtmp-out.svg" alt="rtmp">
+                        <span class="mini-heading">
+                            RTMP Out
+                        </span>
+                    </span>
+                    <span>
+                        <label class="switch">
+                            <input type="checkbox" checked id="rtmpToggle" class="calculator-input">
+                            <span class="toggle round"></span>
+                          </label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="container-2 ">
+            <div class="container-2-view-1 ">
+                <div>
+                    <div class="calculator-heading container-2-padding">
+                        <img src="https://uploads-ssl.webflow.com/63ca2acc6352c221abe583d0/63ce9f4370e278f67c4af22b_estimated-cost.svg" alt="estimate">
+                        <span>Your estimated monthly cost</span>
+                    </div>
+                    <div class="container-2-padding">
+                        <div>
+                            <div class="ui-set cost-section">
+                                <span >
+                                    <span class="sub-heading">
+                                        Conferencing
+                                    </span>
+                                    <div class="conferencing-cost-text">
+                                            <span class="avg-call-length-small">(<span id="confMinutes">15,000</span> min - 10,000 free min) * $<span id="confCostPerMinute">0.004</span></span>
+                                            <span class="info-icon"><img src="https://uploads-ssl.webflow.com/63ca2acc6352c221abe583d0/63d0b719550a569eb977fde5_info.svg" alt=""><div class="info invisible">
+                                                <span class="infoarrow"></span>
+                                                <span class="infotext infotext1">participants x minutes x calls = total minutes</span> 
+                                            </div></span> 
+                                    </div>
+                                </span>
+                                <span class="cost" >
+                                    <span id="confCost">1200</span>
+                                </span>
+                            </div>
+                            <hr class="calculator-hr">
+                        </div>
+                        <div class="invisibility-fix">
+                            <div id="recordingSection" class="invisible">
+                                <div class="ui-set cost-section " >
+                                    <span>
+                                        <span class="sub-heading">
+                                        Recording
+                                        </span>
+                                        <div class="conferencing-cost-text">
+                                        <span class="avg-call-length-small" id="confering-cost-text"><span id="recordingMinutes">3000</span> min * $0.010</span><span class="info-icon"><img src="https://uploads-ssl.webflow.com/63ca2acc6352c221abe583d0/63d0b719550a569eb977fde5_info.svg" alt=""><div class="info invisible">
+                                                <span class="infoarrow"></span>
+                                                <span class="infotext infotext2">minutes x calls = total minutes</span> 
+                                            </div></span> 
+                                        
+                                        </div>
+                                    </span>
+                                    <span class="cost">
+                                        $<span id="recordingCost">
+                                            $1200
+                                        </span>
+                                    </span>
+                                </div>
+                                <hr class="calculator-hr">
+                            </div>
+                            <div id="rtmpSection" class="invisible">
+                                 <div class="ui-set cost-section" >
+                                    <span>
+                                        <span class="sub-heading">
+                                        RTMP Out
+                                        </span>
+                                        <div class="conferencing-cost-text">
+                                            <span class="avg-call-length-small"><span id="rtmpMinutes">3000</span>  min * $0.015<span></span></span>
+                                                <span class="info-icon"><img src="https://uploads-ssl.webflow.com/63ca2acc6352c221abe583d0/63d0b719550a569eb977fde5_info.svg" alt=""><div class="info invisible">
+                                                    <span class="infoarrow"></span>
+                                                    <span class="infotext infotext2">minutes x calls = total minutes</span> 
+                                                </div></span> 
+                                            
+                                        </div>
+                                        
+                                    </span>
+                                    <span class="cost" >
+                                        $<span id="rtmpCost"></span>
+                                    </span>
+                                </div>
+                                <hr class="calculator-hr">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div class="ui-set est">
+                            <span class="est-text">
+                                Estimated Total
+                            </span>
+                            <span class="total-cost-text" id="totalCost">
+                                $1200
+                            </span>
+                        </div>
+                    </div>
+                    <div class="btn-container container-2-padding">
+                        <a href="https://dev.dyte.io/signup" target="_blank">
+                            <button class="calculator-button">
+                                <span class="btn-t-1">
+                                    Start building
+                                </span>
+                                <span class="btn-t-2">
+                                    — with 10,000 free minutes
+                                </span>
+                            </button>
+                        </a>
+                        <div class="calculator-link ">
+                            <a href="http://dyte.io/contact" target="_blank">
+                                Talk to one of our experts
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-2-view-2 hidden">
+                <div class="c2-v2-content">
+                    <img src="https://uploads-ssl.webflow.com/63ca2acc6352c221abe583d0/63cea158e75933fb7d744f79_calc-edit.svg" alt="build">
+                    <div class="alt-view-heading">
+                        Let's build a<br>custom plan
+                    </div>
+                    <div class="alt-view-content">
+                        Help us understand what you need, and we’ll propose a suitable solution for you.
+                    </div>
+                    <div class="btn-container">
+                        <a href="http://dyte.io/contact" target="_blank">
+                            <button class="btn-t-1 calculator-button">
+                                Talk to one of our experts <img class="calculator-chevron" src="https://uploads-ssl.webflow.com/63ca2acc6352c221abe583d0/63ca383d67b4f0f46b551f5a_arrow-con.svg" alt="">
+                            </button>
+    
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://uploads-ssl.webflow.com/63ca2acc6352c221abe583d0/63cea0bf4d514d6a887bc3f3_estimate-cost.webp" class="build-img">
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
