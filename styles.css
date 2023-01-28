@@ -186,7 +186,7 @@ a{
 .conferencing-cost-text{
     margin-top: 0.3rem;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: 4px;
 }
 
@@ -275,7 +275,7 @@ a{
     position: absolute;
     height: 4px;
     width: 99%;
-    margin-top: 16px;
+    margin-top: 14px;
     border-radius: 4px;
   }
   .calculator-range{
@@ -375,24 +375,33 @@ a{
     }
 }
 
-@media only screen and (max-width: 450px)
+@media only screen and (max-width: 500px)
 {
     .info .infotext1{
         left: -200px;
     }
 }
-@media only screen and (max-width: 376px)
+@media only screen and (max-width: 403px)
 {
     .conferencing-cost-text{
         display: block;
     }
-}
-@media only screen and (max-width: 375px){
     .info .infotext1{
         left: 0;
     }
+    .info .infotext{
+    width: 200px;
+   } 
+    
     
 }
+@media only screen and (max-width: 350px)
+{
+    .info .infotext1{
+        left: -70px;
+    }   
+}
+
 
 .hidden{
     display: none;

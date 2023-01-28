@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .calculator-time{
+        padding: 0.5rem 1rem;
+    width: 100px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1rem;
+    border: 1px solid #E5E5E5;
+    border-radius: 5px;
+    }
+    .calculator-time > input{
+        border: none;
+    }
+</style>
+</head>
+
+<body>
+<span class="calculator-time">
+    <input type="text" id="hours" value="00" onkeypress='return restrictAlphabets(event)' onClick="this.select();"> :
+    <input type="text" id="minutes" value="30" onkeypress='return restrictAlphabets(event) ' onClick="this.select();" onfocus="this.select();" >
+</span>
+<script src="https://code.jquery.com/jquery-3.6.3.slim.min.js" integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
+    <script src="./time.js"></script>
+</body>
+</html>

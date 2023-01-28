@@ -22,6 +22,7 @@
                         Participants per call
                     </span>
                     <span class="input-container">
+                        
                         <input type="number" value="10" onkeypress='return restrictAlphabets(event)' id="participantsInput" class="calculator-input">
                         <div class="tooltip invisible">
                             <span class="tooltiparrow"></span>
@@ -45,7 +46,10 @@
                         </div>
                     </span>
                     <span class="input-container">
-                        <input type="time" min="00:00" max="09:00" value = "00:30" id="callLengthInput" class="calculator-input">
+                        <span class="calculator-time">
+                            <input type="text" id="hours" class="calculator-input" value="00" onkeypress='return restrictAlphabets(event)' onClick="this.select();"> :
+                            <input type="text" id="minutes" class="calculator-input" value="30" onkeypress='return restrictAlphabets(event) ' onClick="this.select();" onfocus="this.select();" >
+                        </span>
                         <div class="tooltip invisible">
                             <span class="tooltiparrow"></span>
                             <span class="tooltiptext"></span>
