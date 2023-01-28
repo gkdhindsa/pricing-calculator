@@ -388,13 +388,21 @@ a{
     .container-2{
         margin-top: 2rem;
     }
-    .calculator-input[type="number"]{
+    .calculator-input[type="number"], .calculator-time{
         padding: 0.25rem 0.5rem;
         width: 80px;
     }
-    .info .infotext{
-        left: -125px;
-    }
+    
+    .tooltip .tooltiparrow1{
+        right: -40px;
+        top: -0.9rem;
+    
+      }
+      .tooltip .tooltiptext1{
+        right: -80px;
+        top: -0.6rem;
+      }
+      
 }
 
 @media only screen and (max-width: 450px)
