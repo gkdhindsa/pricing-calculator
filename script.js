@@ -36,9 +36,11 @@ function getConfMode()
 
 }
 
-function getSessionDuration(time)
+function getSessionDuration()
 {
-    return parseInt(time.slice(0,2))*60+parseInt(time.slice(3,5))
+    hours = parseInt($('#hours')[0].value)
+    minutes = parseInt($('#minutes')[0].value)
+    return hours*60+minutes
 }
 
 function checkIfMaximum(totalCost){
@@ -54,11 +56,95 @@ function checkIfMaximum(totalCost){
     }
 }
 
+
+function timeChanged(valueChanged)
+{
+$('.calculator-time').siblings('.tooltip').addClass('invisible')
+  let hours = parseInt($('#hours')[0].value)
+  let minutes = parseInt($('#minutes')[0].value)
+
+  if(valueChanged=='hours')
+  {
+    if(hours<10)
+    {
+        //format single digit to have a preceding zero
+        $('#hours').val(`0${hours}`)
+    }
+    else
+    {
+        $('#hours').val(`${hours.toString().slice(0,1)}`)
+        //second digit becomes the minutes val
+        $('#minutes').val(`0${hours.toString().slice(1,2)}`)
+        
+    }
+    $('#minutes').focus()
+
+  }
+
+  else{
+    if(minutes<10)
+    {
+        //format single digit to have a preceding zero
+        $('#minutes').val(`0${minutes}`) 
+    }
+    else if(minutes>99)
+    {
+        $('#minutes').val(`${minutes.toString().slice(1,2)}${minutes.toString().slice(2,3)}`) 
+        
+        
+    }
+    else
+    {
+        $('#minutes').val(parseInt($('#minutes')[0].value)) 
+
+    }
+
+    //if more than 59
+    if(parseInt($('#minutes')[0].value)>59)
+    {
+        $('#minutes').val('59')
+    }
+  }
+
+
+  //check hours + mins >1 and <300
+  totalMinutes = getSessionDuration()
+
+  if(!totalMinutes|| totalMinutes<1)
+    {
+        //show tooltip min -> choose value more than 1
+        $('.calculator-time').siblings('.tooltip').children('.tooltiptext').text('A call length should be at least 1 minute')
+        $('.calculator-time').siblings('.tooltip').removeClass('invisible')
+        $('#callLengthSlider').val(30) 
+        setSliderBg($('#callLengthSlider')) 
+
+    }
+    else if(totalMinutes>300)
+    {
+        //show tooltip max -> choose value less than 300
+        $('.calculator-time').siblings('.tooltip').children('.tooltiptext').text('Choose a value less than 5 hours')
+        $('.calculator-time').siblings('.tooltip').removeClass('invisible')
+        $('#callLengthSlider').val(30) 
+        setSliderBg($('#callLengthSlider')) 
+    }
+    else{
+       $('#callLengthSlider').val(totalMinutes) 
+       setSliderBg($('#callLengthSlider')) 
+       
+       //calculate
+    calculate()
+    }
+
+
+}
+
+
 function calculate()
 {
     const confMode = getConfMode()
     let numberOfParticipants = $('#participantsInput')[0].value
-    let avgSessionDuration = getSessionDuration($('#callLengthInput')[0].value)
+    //change
+    let avgSessionDuration = getSessionDuration()
     let numberOfMonthlySessions = $('#monthlyCallsInput')[0].value 
     let recordingEnabled  = $('#recordingToggle')[0].checked
     let rtmpOutEnabled = $('#rtmpToggle')[0].checked
@@ -227,54 +313,26 @@ $('#participantsSlider').on('input', (event)=>{
     calculate()
 })
 
+$('#hours').on('input', ()=>{timeChanged('hours')})
+$('#minutes').on('input', ()=>{timeChanged('minutes')})
+// setting average call length -> slider and input box
 
-//setting average call length -> slider and input box
-$('#callLengthInput').on('input' ,(event)=>{
-    $('#callLengthInput').siblings('.tooltip').addClass('invisible')
-    let hours = parseInt(event.target.value.slice(0,2))
-    let mins = parseInt(event.target.value.slice(3,5))
-    let totalMins = hours*60+mins 
-
-    if(!totalMins|| totalMins<1)
-    {
-        //show tooltip min -> choose value more than 1
-        $('#callLengthInput').siblings('.tooltip').children('.tooltiptext').text('A call length should be at least 1 minute')
-        $('#callLengthInput').siblings('.tooltip').removeClass('invisible')
-        $('#callLengthSlider').val(30) 
-        setSliderBg($('#callLengthSlider')) 
-
-    }
-    else if(totalMins>300)
-    {
-        //show tooltip max -> choose value less than 300
-        $('#callLengthInput').siblings('.tooltip').children('.tooltiptext').text('Choose a value less than 300')
-        $('#callLengthInput').siblings('.tooltip').removeClass('invisible')
-        $('#callLengthSlider').val(30) 
-        setSliderBg($('#callLengthSlider')) 
-    }
-    else{
-       $('#callLengthSlider').val(totalMins) 
-       setSliderBg($('#callLengthSlider')) 
-       
-       //calculate
-    calculate()
-    }
-    
-})
 
 $('#callLengthSlider').on('input', (event)=>{
-    $('#callLengthSlider').siblings('.tooltip').addClass('invisible')
+    $('.calculator-time').siblings('.tooltip').addClass('invisible')
 
     let mins = parseInt(event.target.value)
     if(mins>=60)
     {
         let hours = parseInt(mins / 60)
         let minutes = mins % 60
-        $('#callLengthInput').val(`0${hours}:${minutes<10?'0':''}${minutes}`)
+        $('#hours').val(`0${hours}`)
+        $('#minutes').val(`${minutes<10?'0':''}${minutes}`)
     
     }
     else{
-        $('#callLengthInput').val(`00:${mins<10?'0':''}${mins}`)
+        $('#hours').val(`00`)
+        $('#minutes').val(`${mins<10?'0':''}${mins}`)
 
     }
     //calculate
@@ -340,3 +398,4 @@ $('#rtmpToggle').on('input', (event)=>{
 
     
 })
+
